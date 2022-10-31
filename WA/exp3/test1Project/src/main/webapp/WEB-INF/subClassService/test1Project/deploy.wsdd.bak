@@ -1,0 +1,30 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from subClassService WSDL service -->
+
+  <service name="subClass" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://test1Project"/>
+      <parameter name="wsdlServiceElement" value="subClassService"/>
+      <parameter name="schemaQualified" value="http://test1Project"/>
+      <parameter name="wsdlServicePort" value="subClass"/>
+      <parameter name="className" value="test1Project.SubClassSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="subClass"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="sub" qname="operNS:sub" xmlns:operNS="http://test1Project" returnQName="retNS:subReturn" xmlns:retNS="http://test1Project" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:a" xmlns:pns="http://test1Project" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:b" xmlns:pns="http://test1Project" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="sub"/>
+
+  </service>
+</deployment>
